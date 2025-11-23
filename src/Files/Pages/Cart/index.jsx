@@ -65,7 +65,7 @@ const Cartpage = () => {
     <>
       <div className="relative">
         <CartHeader green={0} />
-        <div className="grid text-[unset] relative min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
+        <div className="grid pb-[60px] text-[unset] relative min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
           <div className="max-md:pb-5 mb-8 flex flex-col items-stretch rounded monts border-[0.5px] border-dashed border-[#ca594d] bg-[#fdf8f8] px-6 py-5 md:pt-4">
             <div className="max-md:max-w-full flex items-center justify-between gap-5">
               <div className="text-xs font-bold uppercase leading-[14.4px] tracking-large text-neutral-900 md:text-base md:!leading-[19.2px]">

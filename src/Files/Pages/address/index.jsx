@@ -70,7 +70,7 @@ const AddressPage = () => {
     <>
       <div>
         <CartHeader green={1} />
-        <div className="monts grid min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
+        <div className="monts pb-[60px] grid min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
           {/* LEFT SIDE */}
           <div className="flex items-start justify-between ">
             <div className="flex w-full flex-col gap-6">
@@ -408,49 +408,6 @@ const AddressPage = () => {
                 <div className="ml-2 text-sm font-normal leading-xxl text-neutral-900 select-none md:select-text">
                   Place your order through cash on delivery
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="my-5 flex md:hidden items-center border-b border-b-0 border-neutral-200 pb-8">
-            <div className="bg-transparent flex items-start justify-between">
-              <label className="basis-[90%] peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-base font-normal leading-xxl text-neutral-900 order-2 cursor-pointer">
-                {" "}
-              </label>
-
-              <button
-                type="button"
-                role="checkbox"
-                value="on"
-                className="peer size-4 shrink-0 rounded-[2px] border border-black shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                id=""
-              >
-                <span
-                  className="flex items-center justify-center text-current"
-                  //   style="pointer-events: none;"
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="#000000ff"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4"
-                  >
-                    <path
-                      d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
-                      fill="#000000ff"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
-
-            <div className="bg-transparent">
-              <div className="ml-2 text-sm font-normal leading-xxl text-neutral-900 select-none md:select-text">
-                Place your order through cash on delivery
               </div>
             </div>
           </div>
