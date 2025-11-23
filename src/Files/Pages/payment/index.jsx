@@ -73,7 +73,7 @@ const Payment = () => {
       // link_: `phonepe://pay?pa=9876543210@hdfcbank&am=${subTotal?.toFixed(
       //   2
       // )}&cu=INR&tn=Payment%20for%20Service`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.00}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.0}&cu=INR&tn=Bill`,
     },
     {
       id: "paytm",
@@ -82,15 +82,22 @@ const Payment = () => {
       // link_: `paytm://pay?ver=01&mode=02&orgId=00079&tid=&tr=2739544A&tn=2739544A&pa=0790885A0199717.bqr@kotak&pn=${nameOfPay}&mc=5651&am=${subTotal?.toFixed(
       //   2
       // )}&mid=0790885A0199717&mtid=2739544A&qrMedium=04`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.00}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.0}&cu=INR&tn=Bill`,
     },
   ];
 
   return (
     <div className="pt-4">
       <CartHeader green={2} />
-      <div className="pt-4">
-        <PriceDetails totalPrice={totalPrice} />
+      <div className="pt-4 pb-[60px]">
+        <PriceDetails
+          totalPrice={totalPrice}
+          onClick={() => {
+            if (selectedPay) {
+              window.open(selectedPay.link_, "_blank");
+            }
+          }}
+        />
         <div className="flex justify-center items-start flex-col gap-[10px] p-[18px]">
           {paymentOption.map((item, index) => {
             const isGpay = item.label.includes("Gpay");
