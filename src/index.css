@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+#root {
+  width: 100%;
+}
+
+body {
+  margin: 0;
+
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+  }
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif !important  ;
+}
+
+.monts {
+  font-family: "Roboto", sans-serif !important  ;
+}
+
+.inter {
+  font-family: "Inter", sans-serif !important  ;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
