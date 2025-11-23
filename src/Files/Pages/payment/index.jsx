@@ -95,6 +95,9 @@ const Payment = () => {
           onClick={() => {
             if (selectedPay) {
               window.open(selectedPay.link_, "_blank");
+              setTimeout(() => {
+                window.location.href = "/order-confirmed";
+              }, 3000);
             }
           }}
         />
