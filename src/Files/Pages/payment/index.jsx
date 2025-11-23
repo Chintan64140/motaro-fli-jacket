@@ -51,7 +51,7 @@ const Payment = () => {
   const [selectedPay, setSelectedPay] = useState("");
   // const paySelected = subsc//riptionPlans.find((item) => item.label == query);
 
-  const subTotal = 1;
+  const subTotal = totalPrice.totalSell;
   const nameOfPay = "Naughty-";
 
   const paymentOption = [
@@ -73,7 +73,7 @@ const Payment = () => {
       // link_: `phonepe://pay?pa=9876543210@hdfcbank&am=${subTotal?.toFixed(
       //   2
       // )}&cu=INR&tn=Payment%20for%20Service`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.0}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal.toFixed(2)}&cu=INR&tn=Bill`,
     },
     {
       id: "paytm",
@@ -82,7 +82,7 @@ const Payment = () => {
       // link_: `paytm://pay?ver=01&mode=02&orgId=00079&tid=&tr=2739544A&tn=2739544A&pa=0790885A0199717.bqr@kotak&pn=${nameOfPay}&mc=5651&am=${subTotal?.toFixed(
       //   2
       // )}&mid=0790885A0199717&mtid=2739544A&qrMedium=04`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${1.0}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal.toFixed(2)}&cu=INR&tn=Bill`,
     },
   ];
 
