@@ -6,9 +6,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     tailwindcss({
-      config:{
+      config: {
         important: true,
-      }
+      },
     }),
     react({
       babel: {
@@ -16,4 +16,7 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    historyApiFallback: true,
+  },
 });
