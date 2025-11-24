@@ -54,8 +54,8 @@ const Payment = () => {
   const [selectedPay, setSelectedPay] = useState("");
   // const paySelected = subsc//riptionPlans.find((item) => item.label == query);
 
-  // const subTotal = totalPrice?.totalSell;
-  const subTotal = 1.0;
+  const subTotal = totalPrice?.totalSell;
+  // const subTotal = 1.0;
   const nameOfPay = "Naughty-";
 
   const paymentOption = [

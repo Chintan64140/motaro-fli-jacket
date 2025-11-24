@@ -26454,8 +26454,8 @@
         ],
         "priceObj": {
             "discount": 70,
-            "mrp": 99,
-            "selling_price": 180
+            "mrp": 180,
+            "selling_price": 99
         },
         "id": "912a7c8e-c6ee-4f65-80f9-cc3394eded2d"
     },
