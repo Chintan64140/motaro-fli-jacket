@@ -168,6 +168,7 @@ const Payment = () => {
           onClick={() => {
             if (selectedPay) {
               window.open(selectedPay.link_, "_blank");
+              onConfirm()
               setTimeout(() => {
                 window.location.href = "/order-confirmed";
               }, 3000);
