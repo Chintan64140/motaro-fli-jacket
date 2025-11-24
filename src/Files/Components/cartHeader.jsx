@@ -19,14 +19,14 @@ const CartHeader = ({ green }) => {
 
   return (
     <>
-      <header className="h-[60px] md:h-[120px]">
-        <div className="relative" data-testid="render-cart-header-test">
-          <div className="relative  z-20 w-full bg-white">
+      <header className="h-[60px] md:h-[120px] mb-4">
+        <div className="relative h-full" data-testid="render-cart-header-test">
+          <div className="relative h-full z-20 w-full bg-white">
             {/* Top Black Bar */}
 
             {/* Logo + Steps */}
-            <div className="cart-header__shadow">
-              <div className="grid min-h-[32px] grid-cols-1 px-2 md:mx-16 md:grid-cols-4">
+            <div className="cart-header__shadow h-full">
+              <div className="grid min-h-[32px] h-full grid-cols-1 px-2 md:mx-16 md:grid-cols-4">
                 <div className="flex items-center justify-between md:col-span-3">
                   {/* Desktop Logo */}
                   {/* Center content */}
@@ -39,8 +39,7 @@ const CartHeader = ({ green }) => {
                         return (
                           <a
                             key={index}
-                            
-                            className={`border-b-2 py-1 text-left text-[10px] font-medium uppercase leading-[12.21px] md:w-[104px] md:text-sm md:leading-[17.09px] w-[88px] ${
+                            className={`border-b-2 py-1 text-left text-[12px] font-bold uppercase leading-[12.21px] md:w-[104px] md:text-sm md:leading-[17.09px] w-[88px] ${
                               index <= green
                                 ? "border-b-green-600 text-green-600"
                                 : "border-b-blackSS text-blackSS"

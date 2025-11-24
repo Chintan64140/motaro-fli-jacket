@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CartHeader from "../../Components/cartHeader";
-import PriceDetails from "../../Components/cartPrice-Details";
+// import PriceDetails from "../../Components/cartPrice-Details";
 import { useOrder } from "../../Context/OrderContext";
 import { useCart } from "../../Context/CartContext";
 import { useConfirmedOrders } from "../../Context/ConfimedorderContext";
+import PriceDetails from "../../Components/cart_price";
+import PlaceBtn from "../../Components/place-btn";
+import { toast } from "react-toastify";
 
 const Payment = () => {
   const onConfirm = () => {
@@ -51,7 +54,8 @@ const Payment = () => {
   const [selectedPay, setSelectedPay] = useState("");
   // const paySelected = subsc//riptionPlans.find((item) => item.label == query);
 
-  const subTotal = totalPrice?.totalSell;
+  // const subTotal = totalPrice?.totalSell;
+  const subTotal = 1.0;
   const nameOfPay = "Naughty-";
 
   const paymentOption = [
@@ -65,7 +69,7 @@ const Payment = () => {
     },
     {
       id: "phone-pe",
-      label: "Phonepe",
+      label: "Phonepe (Extra 10% Cashback)",
       icon: "https://play-lh.googleusercontent.com/6iyA2zVz5PyyMjK5SIxdUhrb7oh9cYVXJ93q6DZkmx07Er1o90PXYeo6mzL4VC2Gj9s=w480-h960-rw",
       // link_: `phonepe://pay?ver=01&mode=02&orgId=00079&tid=&tr=2739544A&tn=2739544A&pa=0790885A0199717.bqr@kotak&pn=${nameOfPay}&mc=5651&am=${subTotal?.toFixed(
       //   2
@@ -73,7 +77,9 @@ const Payment = () => {
       // link_: `phonepe://pay?pa=9876543210@hdfcbank&am=${subTotal?.toFixed(
       //   2
       // )}&cu=INR&tn=Payment%20for%20Service`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal?.toFixed(2)}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal?.toFixed(
+        2
+      )}&cu=INR&tn=Bill`,
     },
     {
       id: "paytm",
@@ -82,26 +88,42 @@ const Payment = () => {
       // link_: `paytm://pay?ver=01&mode=02&orgId=00079&tid=&tr=2739544A&tn=2739544A&pa=0790885A0199717.bqr@kotak&pn=${nameOfPay}&mc=5651&am=${subTotal?.toFixed(
       //   2
       // )}&mid=0790885A0199717&mtid=2739544A&qrMedium=04`,
-      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal?.toFixed(2)}&cu=INR&tn=Bill`,
+      link_: `phonepe://pay?pa=4015610007554810.cc@idfcbank&pn=Montaro&am=${subTotal?.toFixed(
+        2
+      )}&cu=INR&tn=Bill`,
+    },
+  ];
+
+  console.log(totalPrice);
+
+  const priceArray = [
+    {
+      name: `Price (${cart.length} Item)`,
+      amount: totalPrice?.totalMRP,
+    },
+    {
+      name: `Discount`,
+      amount: totalPrice?.totalDis,
+    },
+    {
+      name: `Delivery Fee`,
+      amount: "Free",
     },
   ];
 
   return (
-    <div className="pt-4">
+    <div className="bg-[#f9f9f9] h-full relative pb-[60px]">
       <CartHeader green={2} />
-      <div className="pt-4 pb-[60px]">
-        <PriceDetails
-          totalPrice={totalPrice}
-          onClick={() => {
-            if (selectedPay) {
-              window.open(selectedPay.link_, "_blank");
-              setTimeout(() => {
-                window.location.href = "/order-confirmed";
-              }, 3000);
-            }
-          }}
-        />
-        <div className="flex justify-center items-start flex-col gap-[10px] p-[18px]">
+      <div className="pt-4 ">
+        {totalPrice && (
+          <PriceDetails
+            containerClassname={"shadow"}
+            priceArray={priceArray}
+            totalPrice={totalPrice?.totalSell}
+            totalDis={totalPrice?.totalDis}
+          />
+        )}
+        <div className="flex justify-center items-start flex-col  py-4 bg-[#fff] shadow m-4 rounded-2xl !mt-8">
           {paymentOption.map((item, index) => {
             const isGpay = item.label.includes("Gpay");
 
@@ -114,10 +136,14 @@ const Payment = () => {
                     setSelectedPay(item);
                   }
                 }}
-                className={` border-b px-3 border-[#b5b5b5] py-3 rounded  flex w-full justify-start gap-[10px] items-center`}
+                className={`  px-6 border-[#b5b5b5] py-5 rodunded  flex w-full justify-start gap-[10px] items-center`}
                 //   style={{ backgroundColor: plan.bgColor }}
                 style={{
                   opacity: isGpay ? 0.5 : 1,
+                  borderBottom:
+                    index !== paymentOption.length - 1
+                      ? "1px solid rgba(211, 211, 211, 1)"
+                      : "0px",
                 }}
               >
                 <input
@@ -136,6 +162,24 @@ const Payment = () => {
           })}
         </div>
       </div>
+      {totalPrice && (
+        <PlaceBtn
+          totalPrice={totalPrice}
+          onClick={() => {
+            if (selectedPay) {
+              window.open(selectedPay.link_, "_blank");
+              setTimeout(() => {
+                window.location.href = "/order-confirmed";
+              }, 3000);
+            } else {
+              toast.error("Select Payment Option", {
+                position: "bottom-center",
+                autoClose: 3000,
+              });
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

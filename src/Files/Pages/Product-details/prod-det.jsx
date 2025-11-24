@@ -8,6 +8,7 @@ import { Price } from "./Components/price";
 import Policy from "./Components/policy";
 import { customerSupportIcon, returnIcon } from "./Components/Svgs/return";
 import Specifications from "./Components/prod-specification";
+import ActionButtons from "./Components/cartBtns";
 
 export function ProductCardDetails({
   product,
@@ -22,7 +23,6 @@ export function ProductCardDetails({
   //   const result =
   const prod = { ...product };
 
-  console.log(prod, "akjasdlkjsdjciosdj");
   const features = [
     {
       title: "7-Day Return",
@@ -57,7 +57,7 @@ export function ProductCardDetails({
                 }}
               >
                 {/* Quantity Controls */}
-                <div className="flex basis-[19%] items-center justify-between gap-4">
+                <div className="flex basis-[19%] items-center justify-between gap-4 pl-4">
                   {/* Minus Button */}
                   <div className="flex cursor-pointer justify-center rounded-full border-[1.5px] border-neutral-400 p-2">
                     <div
@@ -81,7 +81,7 @@ export function ProductCardDetails({
                   </div>
 
                   {/* Plus Button Disabled */}
-                  <div className="flex justify-center rounded-full border-[1.5px] border-neutral-400 p-2 cursor-not-allowed opacity-40">
+                  <div className="flex justify-center rounded-full border-[1.5px] border-neutral-400 p-2 cursor-not-allowed">
                     <div
                       className="w-3 md:w-[13.71px]"
                       onClick={() => {
@@ -98,7 +98,6 @@ export function ProductCardDetails({
                   </div>
                 </div>
 
-                {/* View Bag Button */}
                 <div className="flex basis-3/5 items-center justify-evenly w-full">
                   <button
                     onClick={() => {
@@ -107,54 +106,72 @@ export function ProductCardDetails({
                     className="inline-flex  items-center justify-center whitespace-nowrap text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none bg-blackSS shadow text-white h-9 font-medium rounded-sm gap-2 disabled:bg-neutral-300 disabled:opacity-100 w-[90%] p-6"
                     style={{
                       background:
-                        "linear-gradient(90deg, rgba(189, 166, 51, 1), rgb(255, 193, 3))",
+                        "linear-gradient(90deg, rgb(255, 228, 92), rgb(255, 193, 3))",
                     }}
                   >
-                    <img
-                      alt="bag_white"
-                      src="https://www.shoppersstop.com/icons/bag_white.svg"
-                      loading="lazy"
-                    />
-                    <p className="text-xs font-medium uppercase leading-4 tracking-sm md:text-base md:leading-4 py-2">
-                      View Bag
-                    </p>
+                    <div
+                      dir="auto "
+                      className="css-1rynq56 w-full !flex justify-center h-full items-center"
+                      style={{
+                        color: "rgb(51, 51, 51)",
+                        fontSize: "14px",
+                        lineHeight: "18px",
+                        fontFamily: "inter_bold",
+                      }}
+                    >
+                      <p className="text-sm font-medium uppercase leading-4 tracking-sm md:text-base md:leading-4 py-2">
+                        Go to Cart
+                      </p>
+                    </div>
                   </button>
                 </div>
               </div>
             </div>
           ) : (
-            <div
-              className="max-md:px-3 flex items-center gap-2 bg-white md:gap-6 xs:mx-0 xs:pl-3 px-0"
-              style={{ boxShadow: "rgba(0,0,0,0.05) 0px -2px 4px" }}
-            >
-              <div className="flex  w-full justify-between gap-4 my-3 flex-row-reverse">
-                <button
-                  onClick={() => {
-                    if (selectedSize) {
-                      addToCart({ ...product, size: selectedSize });
-                    } else {
-                      toast.error("Select Size", {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                      });
-                    }
-                  }}
-                  className=" items-center justify-center whitespace-nowrap text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none shadow text-white h-9 font-medium rounded-sm gap-0 disabled:bg-neutral-300 disabled:opacity-100 flex w-full  md:min-h-[56px] md:py-[17.5px] px-1 py-0"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(189, 166, 51, 1), rgb(255, 193, 3))",
-                  }}
-                >
-                  <div className="bg-transparent flex items-center gap-2">
-                    <img
-                      src="https://www.shoppersstop.com/icons/bag_white.svg"
-                      className="size-6"
-                    />
-                    <p className="text-md font-medium uppercase">Add to bag</p>
-                  </div>
-                </button>
-              </div>
-            </div>
+            <ActionButtons
+              onClick={() => {
+                if (selectedSize) {
+                  addToCart({ ...product, size: selectedSize });
+                } else {
+                  toast.error("Select Size", {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                  });
+                }
+              }}
+            />
+            // <div
+            //   className="max-md:px-3 flex items-center gap-2 bg-white md:gap-6 xs:mx-0 xs:pl-3 px-0"
+            //   style={{ boxShadow: "rgba(0,0,0,0.05) 0px -2px 4px" }}
+            // >
+            //   <div className="flex  w-full justify-between gap-4 my-3 flex-row-reverse">
+            //     <button
+            //       onClick={() => {
+            //         if (selectedSize) {
+            //           addToCart({ ...product, size: selectedSize });
+            //         } else {
+            //           toast.error("Select Size", {
+            //             position: "bottom-center",
+            //             autoClose: 3000,
+            //           });
+            //         }
+            //       }}
+            //       className=" items-center justify-center whitespace-nowrap text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none shadow text-white h-9 font-medium rounded-sm gap-0 disabled:bg-neutral-300 disabled:opacity-100 flex w-full  md:min-h-[56px] md:py-[17.5px] !px-1 !py-2"
+            //       style={{
+            //         background:"#ffd710ff"
+            //           // "linear-gradient(90deg, #e1c849ff, rgb(255, 193, 3))",
+            //       }}
+            //     >
+            //       <div className="bg-transparent flex items-center gap-2">
+            //         <img
+            //           src="https://www.shoppersstop.com/icons/bag_black.svg"
+            //           className="size-6"
+            //         />
+            //         <p className="text-md text-black font-bold uppercase">Add to bag</p>
+            //       </div>
+            //     </button>
+            //   </div>
+            // </div>
           )}
         </div>
 

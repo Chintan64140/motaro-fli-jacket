@@ -3,7 +3,7 @@ const CartItem = ({ product }) => {
   const immg = product.imagesData[0].src;
 
   return (
-    <div className="flex flex-col gap-3 border border-[#cbcbcb] rounded-md p-3 bg-white">
+    <div className="flex flex-col gap-3  p-4 pt-6 bg-white">
       <div className="flex gap-3">
         <img src={immg} className="w-[72px] h-[72px] object-contain" />
         <div className="max-w-[calc(100%-72px)] flex flex-col gap-1">

@@ -5,10 +5,12 @@ import { useOrder } from "../../Context/OrderContext";
 import { useConfirmedOrders } from "../../Context/ConfimedorderContext";
 import { useCart } from "../../Context/CartContext";
 import CartHeader from "../../Components/cartHeader";
-import PriceDetails from "../../Components/cartPrice-Details";
+import PriceDetails from "../../Components/cart_price";
+import PlaceBtn from "../../Components/place-btn";
+// import PriceDetails from "../../Components/cartPrice-Details";
 
 const errorMsg = (Lable) => {
-  return <p className="text-[12px] text-[red]">{Lable} is missing!</p>;
+  return <p className="text-md text-[red]">{Lable} is missing!</p>;
 };
 
 const AddressPage = () => {
@@ -66,18 +68,32 @@ const AddressPage = () => {
     return submitted ? (addPayload[key] ? "" : errorMsg(Lable)) : "";
   };
 
+  const priceArray = [
+    {
+      name: `Price (${cart.length} Item)`,
+      amount: priceOObj.totalMRP,
+    },
+    {
+      name: `Discount`,
+      amount: priceOObj.totalDis,
+    },
+    {
+      name: `Delivery Fee`,
+      amount: "Free",
+    },
+  ];
   return (
     <>
-      <div>
+      <div className=" pb-[60px] relative bg-[#f9f9f9]">
         <CartHeader green={1} />
-        <div className="monts pb-[60px] grid min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
+        <div className="monts grid min-h-[72px] grid-cols-1 place-content-between gap-6 px-4 md:mx-14 md:grid-cols-3">
           {/* LEFT SIDE */}
           <div className="flex items-start justify-between ">
             <div className="flex w-full flex-col gap-6">
               {/* Delivery Options */}
               <div className="flex flex-col">
                 <div className="flex flex-col gap-5">
-                  <div className="text-[10px] md:text-xs lg:text-sm xl:text-base font-bold !leading-[19.2px] tracking-wider text-neutral-900 select-none md:select-text">
+                  <div className="text-[10px] md:text-md lg:text-md xl:text-base font-bold !leading-[19.2px] tracking-wider text-neutral-900 select-none md:select-text">
                     DELIVERY OPTIONS AVAILABLE
                   </div>
 
@@ -119,7 +135,7 @@ const AddressPage = () => {
                               className="aspect-square my-auto w-8 max-w-full shrink-0 overflow-hidden object-contain object-center"
                               loading="lazy"
                             />
-                            <div className="text-sm font-medium capitalize !leading-[16.8px] tracking-wide text-neutral-900">
+                            <div className="text-md font-medium capitalize !leading-[16.8px] tracking-wide text-neutral-900">
                               Standard Delivery
                             </div>
                           </div>
@@ -129,24 +145,24 @@ const AddressPage = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 text-sm font-normal text-red-600 select-none md:select-text">
+                <div className="mt-6 text-md font-normal text-red-600 select-none md:select-text">
                   Please add an address to proceed
                 </div>
 
                 {/* No Address */}
                 {/* <div className="flex w-full flex-col">
                   <div className="mt-6 rounded-t-sm border-[0.5px] border-b-0 border-neutral-400 p-4">
-                    <div className="text-sm md:text-base lg:text-lg text-ssBlack mt-8 text-center font-medium leading-[157%] tracking-[0.15px] xl:text-lg">
+                    <div className="text-md md:text-base lg:text-lg text-ssBlack mt-8 text-center font-medium leading-[157%] tracking-[0.15px] xl:text-lg">
                       You have no saved addresses.
                     </div>
-                    <div className="text-xs md:text-sm lg:text-base xl:text-lg font-normal mt-1 text-center leading-[166%] tracking-xs text-neutral-500">
+                    <div className="text-md md:text-md lg:text-base xl:text-lg font-normal mt-1 text-center leading-[166%] tracking-xs text-neutral-500">
                       Please add an address for quick checkout
                     </div>
                   </div>
 
                   <div className="rounded-b-sm border-[0.5px] border-neutral-400 bg-transparent p-4 font-bold tracking-wider text-blackSS">
-                    <button className="inline-flex items-center justify-center whitespace-nowrap text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none shadow h-9 rounded-sm gap-0 disabled:bg-neutral-300 disabled:opacity-100 w-full rounded-t-sm border-[0.5px] border-neutral-400 bg-transparent p-4 font-bold tracking-wider text-blackSS md:min-h-[40px] md:w-auto md:py-[19.34px]">
-                      <p className="text-xs uppercase leading-4 tracking-sm md:text-sm font-medium md:!leading-4">
+                    <button className="inline-flex items-center justify-center whitespace-nowrap text-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none shadow h-9 rounded-sm gap-0 disabled:bg-neutral-300 disabled:opacity-100 w-full rounded-t-sm border-[0.5px] border-neutral-400 bg-transparent p-4 font-bold tracking-wider text-blackSS md:min-h-[40px] md:w-auto md:py-[19.34px]">
+                      <p className="text-md uppercase leading-4 tracking-sm md:text-md font-medium md:!leading-4">
                         ADD NEW ADDRESS
                       </p>
                     </button>
@@ -156,9 +172,9 @@ const AddressPage = () => {
             </div>
           </div>
 
-          <div>
+          <div className="bg-[#fff] p-4 pt-3 rounded-xl shadow">
             <div className="bg-transparent  w-full ">
-              <div className="text-sm font-medium capitalize mb-2 !leading-[16.8px] tracking-wide text-neutral-900">
+              <div className="text-md font-medium capitalize mb-4 !leading-[16.8px] tracking-wide text-neutral-900">
                 Please Enter Address
               </div>
               {/* NAME */}
@@ -251,7 +267,7 @@ const AddressPage = () => {
                     />
                     <label
                       htmlFor="City"
-                      className="absolute left-1 top-2 z-10 origin-[0] -translate-y-5 scale-75 bg-white px-2 text-base text-neutral-500 transition-all duration-300"
+                      className="absolute left-1 top-2 z-10 origin-[0] -translate-y-5 scale-75 bg-white px-2 text-base text-neutral-500 transition-all duration-300 !text-md"
                     >
                       City
                     </label>
@@ -271,7 +287,7 @@ const AddressPage = () => {
                     />
                     <label
                       htmlFor="State"
-                      className="absolute left-1 top-2 z-10 origin-[0] -translate-y-5 scale-75 bg-white px-2 text-base text-neutral-500 transition-all duration-300"
+                      className="absolute left-1 top-2 z-10 origin-[0] -translate-y-5 scale-75 bg-white px-2 text-md text-neutral-500 transition-all duration-300"
                     >
                       State
                     </label>
@@ -289,13 +305,13 @@ const AddressPage = () => {
                     maxLength={255}
                     name="address"
                     onChange={handleChange}
-                    className="peer block w-full resize-none rounded-lg border border-neutral-400 bg-transparent px-4 py-3 text-sm text-blackSS focus:outline-none focus:ring-0"
+                    className="peer block w-full resize-none rounded-lg border border-neutral-400 bg-transparent px-4 py-3 text-md text-blackSS focus:outline-none focus:ring-0"
                     placeholder=" "
                   ></textarea>
 
                   <label
                     htmlFor="Address"
-                    className="absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 bg-white px-2 text-sm text-neutral-500 transition-all duration-300
+                    className="absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 bg-white px-2 text-md text-neutral-500 transition-all duration-300
             peer-placeholder-shown:top-[18px] peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100"
                   >
                     Address
@@ -310,7 +326,7 @@ const AddressPage = () => {
               </div>
 
               {/* ADDRESS TYPE */}
-              <div className="mt-6 text-lg mx-2 text-neutral-500 xs:text-sm">
+              <div className="mt-6 text-lg mx-2 text-neutral-500 xs:text-md">
                 Address Type
               </div>
 
@@ -332,7 +348,7 @@ const AddressPage = () => {
                         )}
                       </button>
 
-                      <label className="text-sm md:text-base text-neutral-900">
+                      <label className="text-md md:text-base text-neutral-900">
                         {type}
                       </label>
                     </div>
@@ -345,7 +361,12 @@ const AddressPage = () => {
 
           {/* RIGHT SIDE PRICE BOX */}
           <div>
-            <PriceDetails
+            {/* <PriceDetails
+              priceArray={priceArray}
+              totalPrice={totalAmount.totalSell}
+              totalDis={totalAmount.totalDis}
+            /> */}
+            {/* <PriceDetails
               totalPrice={priceOObj}
               onClick={() => {
                 setSubmitted(true);
@@ -367,51 +388,40 @@ const AddressPage = () => {
                   console.log("is All Ok NOOOOOOOOO");
                 }
               }}
-            />
-            <div className="my-5 hidden md:flex mx-4 items-center border-b border-b-0 border-neutral-200 pb-8">
-              <div className="bg-transparent flex items-start justify-between">
-                <label className="basis-[90%] peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-base font-normal leading-xxl text-neutral-900 order-2 cursor-pointer">
-                  {" "}
-                </label>
-
-                <button
-                  type="button"
-                  role="checkbox"
-                  value="on"
-                  className="peer size-4 shrink-0 rounded-[2px] border border-black shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                  id=""
-                >
-                  <span
-                    className="flex items-center justify-center text-current"
-                    //   style="pointer-events: none;"
-                  >
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 15 15"
-                      fill="#000000ff"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="size-4"
-                    >
-                      <path
-                        d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
-                        fill="#000000ff"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </span>
-                </button>
-              </div>
-
-              <div className="bg-transparent">
-                <div className="ml-2 text-sm font-normal leading-xxl text-neutral-900 select-none md:select-text">
-                  Place your order through cash on delivery
-                </div>
-              </div>
-            </div>
+            /> */}
           </div>
         </div>
+        <div>
+          <PriceDetails
+            priceArray={priceArray}
+            totalPrice={totalAmount.totalSell}
+            totalDis={totalAmount.totalDis}
+            containerClassname={"!bg-[#fff] !mx-4 !mb-8 shadow rounded !m-4"}
+          />
+        </div>
+        <PlaceBtn
+          onClick={() => {
+            setSubmitted(true);
+
+            if (allFilled) {
+              for (let index = 0; index < orders.length; index++) {
+                const element = orders[index];
+                addConfirmedOrder({
+                  id: element.id, // which order to update
+                  status: "Pending",
+                  payment: "Pending", // new data you want to update
+                  address: { ...addPayload },
+                  orderDetails: { ...element },
+                });
+              }
+
+              window.location.href = "/cart/payment";
+            } else {
+              console.log("is All Ok NOOOOOOOOO");
+            }
+          }}
+          totalPrice={totalAmount}
+        />
       </div>
     </>
   );
